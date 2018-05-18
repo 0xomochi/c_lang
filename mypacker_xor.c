@@ -1,4 +1,5 @@
 // This is the code of my first packer.
+// The code from the book named  "Analyzing Malware"
 
 # include <stdio.h>
 # include <windows.h>
@@ -20,7 +21,7 @@ unsigned char decode_stub[] = {
 unsigned int decode_start_offset      = 2;
 unsigned int decode_size_offset       = 7;
 unsigned int base_address_offset      = 13;
-unsigned int bdecoder_offset          = 18;
+unsigned int decoder_offset          = 18;
 unsigned int jmp_oep_addr_offset      = 27;
 
 void create_decode_stub(
@@ -30,7 +31,31 @@ void create_decode_stub(
   int cnt = 0;
   int jmp_len_to_oep = 0;
 
-  jmp_len_to_oep = oep -
-                  (code_vaddr + code_vsize + sizeof(decode_stub));
+  jmp_len_to_oep = oep - (code_vaddr + code_vsize + sizeof(decode_stub));
+
   memcpy(&decode_stub[decode_start_offset], &code_vaddr, sizeof(DWORD));
+  memcpy(&decode_stub[decode_size_offset], &code_vsize, sizeof(DWORD));
+  memcpy(&decode_stub[base_address_offset], &base_addr, sizeof(DWORD));
+  memcpy(&decode_stub[jmp_oep_addr_offset], &jmp_len_to_oep, sizeof(DWORD)):
+  
+  return;
+}
+
+void xor_encoder(unsigned char *start, unsigned int size, BYTE encoder}{
+    
+    unsigned int    cnt = 0;
+
+    for(cnt = 0; cnt < size; cnt++){
+        start[cnt] ^= encoder;
+    }
+}
+
+int main(int argc, char **argv){
+  target_filename = argv[1];
+  packed_filename = argv[2];
+
+// Loading the program will be packed
+hTargetBin = CreateFile(target_filename, GENERIC_READ
+
+
 
