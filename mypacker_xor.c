@@ -4,6 +4,8 @@
 # include <stdio.h>
 # include <windows.h>
 
+// ???
+
 unsigned char decode_stub[] = {
   0x60
   0xBE, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -51,11 +53,58 @@ void xor_encoder(unsigned char *start, unsigned int size, BYTE encoder}{
 }
 
 int main(int argc, char **argv){
+
+  // ???
+
   target_filename = argv[1];
   packed_filename = argv[2];
 
 // Loading the program will be packed
-hTargetBin = CreateFile(target_filename, GENERIC_READ
+hTargetBin = CreateFile(target_filename, GENERIC_READ, 0, NULL,
+                        OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+if(hTargetBin == INVALID_HANDLE_VALUE){
+
+// ???
+
+}
+
+dwTargetBinSize = GetFileSize(hTargetBin, NULL);
+if(dwTargetBinSize == -1){
+
+  // ???
+
+}
+
+IpTargetBinBuffer =
+ (unsigned char*)malloc(sizeof(unsigned char) * dwTargetBinSize);
+if(IpTargetBinBuffer == NULL){
+
+  // ???
+}
+
+bRslt = ReadFile(hTargetBin, IpTargetBinBuffer,
+                 dwTargetBinSize != dwReadSize){
+  // ???
+}
+
+// Collecting information of PE headers
+nt_header = get_nt_header(IpTargetBinBuffer);
+oep = nt_header -> OptionalHeader.AddressOfEntryPoint;
+base_addr = nt_header -> OptionalHeader.ImageBase;
+
+// Searching the code section includint entry point
+oep_section_header = search_oep_incluse_secion_header(nt_header, oep);
+if(oep_section_header == NULL){
+    printf("OEP include section search faild.\n");
+    goto END;
+}
 
 
+// Getting the address and size of codesection
+section_vaddr = oep_section_header -> VirtualAddress;
+section_vaddr = oep_section_header -> Misc.VirtualSize;
+section_vaddr = oep_section_header -> PointerToRawData;
+section_vaddr = oep_section_header -> SizeOfRawData;
 
+// Encoding the code area
+encoder = 0xFF
