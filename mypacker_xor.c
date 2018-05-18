@@ -128,4 +128,4 @@ nt_header -> OptionalHeader.AddressOfEntryPoint = section_vaddr + section_vsize;
 oep_section_header -> Characteristics |= IMAGE_SCN_MEM_WRITE;
 
 // Make a list of packed program
-hPackedBin
+hPackedBin = 
