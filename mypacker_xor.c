@@ -108,3 +108,24 @@ section_vaddr = oep_section_header -> SizeOfRawData;
 
 // Encoding the code area
 encoder = 0xFF
+xor_encoder(
+    (unsigned char*)(oep_section_header -> PointerToRawData + IpTargetBinBuffer),
+                     oep_section_header -> Misc.VirtualSize, encoder);
+
+// Make expantion routine
+create_decode_stub(section_vaddr, section_vsize, base_addr, encoder, oep);
+
+// Add expantion routine
+memcpy((unsigned char*)(section_raddr + section_vsize + IpTargetBinBuffer),decode_stub, sizeof(decode_stub));
+
+// modify PE header
+oep_section_header -> Misc.VirtualSize = section_rsize;
+
+// modify Entry point
+nt_header -> OptionalHeader.AddressOfEntryPoint = section_vaddr + section_vsize;
+
+//Add write attribution to code section
+oep_section_header -> Characteristics |= IMAGE_SCN_MEM_WRITE;
+
+// Make a list of packed program
+
