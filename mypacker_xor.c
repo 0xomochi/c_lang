@@ -1,10 +1,20 @@
 // This is the code of my first packer.
 // The code from the book named  "Analyzing Malware"
 
+#define _CRT_SECURE_NO_WARNINGS
+
 # include <stdio.h>
 # include <windows.h>
 
-// ???
+void xor_encoder(unsigned char *start, unsigned int size, BYTE encoder){
+  unsigned int cnt = 0;
+
+  ptintf("Start Xor Encode by '0x%X'\n", encoder);
+  for(cnt = 0; cnt < size; cnt++){
+    start[cnt] ^= encoder;
+  }
+  printf("Encode Done\n");
+}
 
 unsigned char decode_stub[] = {
   0x60
