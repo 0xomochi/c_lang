@@ -1,5 +1,5 @@
 // This is the code of my first packer.
-// The code from the book named  "Analyzing Malware"
+// The code from the book named  "Analyzing Malware".
 
 #define _CRT_SECURE_NO_WARNINGS
 
