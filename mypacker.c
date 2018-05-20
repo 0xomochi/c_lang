@@ -1,3 +1,5 @@
+// this code is from the book "analysing malware"
+
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
